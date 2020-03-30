@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Transportes Factor</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<link rel="stylesheet" type="text/css" href="css/util.css">
+<link rel="stylesheet" type="text/css" href="css/main.css">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<script type="text/javascript">
+  
+$(document).ajaxStart(function() {
+  $("#upd_pwd").hide();
+  $("#loading").show();
+     }).ajaxStop(function() {
+  $("#loading").hide();
+  $("#upd_pwd").show();
+  });  
+
+
+$(document).ready(function() {
+  $("#upd_pwd").submit(function() {    
+    $.ajax({
+      type: "POST",
+      url: 'controles/controlResetPWD.php',
+      data:$("#upd_pwd").serialize(),
+      success: function (result) { 
+        var msg = result.trim();
+
+        switch(msg) {
+                case '0':
+                    swal("Error de datos", "Favor verifique los datos ingresados", "warning");
+                    break;
+                case '1':
+                    swal("Error de Datos", "Los datos ingresados no son validos, favor reintente", "warning");
+                    break;
+                
+                case '3':
+                    swal("Error Base de Datos", "Error de base de datos, comuniquese con el administrador", "warning");
+                    break;
+                default:
+                    swal("Contraseña Reestablecida", msg, "success");
+                    setInterval('location.reload()',10000);
+            }
+      },
+      error: function(){
+              alert('Verifique los datos')      
+      }
+    });
+    return false;
+  });
+});
+
+</script>
+
+  <style type="text/css">
+  #main{
+  width: 50%;
+}
+
+  
+    @media (max-width: 800px) {
+    
+        #main{
+                    width: 100%;
+                  }
+        
+
+}
+
+  </style>
+
+</head>
+
+<body>
+
+
+
+
+
+
+
+
+</head>
+<body>
+
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100">
+      <div class="login100-form-title" style="background-image: url(images/bg-01.jpg);">
+        <span class="login100-form-title-1">
+          Actualizar Password
+        </span>
+      </div>
+
+      <form class="login100-form validate-form" action="controles/controlResetPwd.php" method="post" id="upd_pwd" name="upd_pwd">
+        <div class="wrap-input100 validate-input m-b-26" data-validate="Rut es Requerido">
+          <span class="label-input100">Rut</span>
+          <input class="input100" type="text" name="rut" placeholder="Ingrese Rut: '12345678-9'" id="rut" pattern="\d{3,8}-[\d|kK]{1}" name="rut">
+          <span class="focus-input100"></span>
+        </div>
+
+        <div class="wrap-input100 validate-input m-b-18" data-validate = "Contraseña es Requerida">
+          <span class="label-input100">Mail</span>
+          <input class="input100" type="text" id="mail" name="mail" maxlength="50" placeholder="Mail Registrado en Sistema">
+          <span class="focus-input100"></span>
+        </div>
+
+        <div class="flex-sb-m w-full p-b-30">
+
+
+          <div>
+           
+          </div>
+        </div>
+        <div class="container-login100-form-btn">
+          <button class="login100-form-btn" type="submit">
+            Recuperar Contraseña
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="vendor/animsition/js/animsition.min.js"></script>
+<script src="vendor/bootstrap/js/popper.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="vendor/select2/select2.min.js"></script>
+<script src="vendor/daterangepicker/moment.min.js"></script>
+<script src="vendor/daterangepicker/daterangepicker.js"></script>
+<script src="vendor/countdowntime/countdowntime.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
